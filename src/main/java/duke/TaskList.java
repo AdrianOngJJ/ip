@@ -80,4 +80,19 @@ public class TaskList {
         masterList.remove(index);
         return currTask;
     }
+
+    /**
+     * Find all tasks matching keyword
+     * @param keyword Word to be searched
+     * @return List of tasks that matches the keyword
+     */
+    public ArrayList<Task> find(String keyword) {
+        ArrayList<Task> listToReturn = new ArrayList<>();
+        for (Task task: masterList) {
+            if (task.description.contains(keyword)) {
+                listToReturn.add(task);
+            }
+        }
+        return listToReturn;
+    }
 }

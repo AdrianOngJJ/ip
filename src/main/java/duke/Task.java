@@ -21,8 +21,8 @@ public class Task {
     }
 
     /**
-     * Mark item as done
-     * @return Item that is done
+     * Mark task as done
+     * @return Task that is done
      */
     public Task markAsDone() {
         this.isDone = true;
@@ -30,8 +30,8 @@ public class Task {
     }
 
     /**
-     * Mark item as undone
-     * @return Item that is undone
+     * Mark task as undone
+     * @return Task that is undone
      */
     public Task unmarkItem() {
         this.isDone = false;

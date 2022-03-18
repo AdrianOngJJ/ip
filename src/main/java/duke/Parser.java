@@ -1,6 +1,7 @@
 package duke;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -101,10 +102,28 @@ public class Parser {
         case "delete":
             Task deletedTask = tasklist.delete(Integer.parseInt(inputArr[1]) - 1);
             return DELETE_SUCCESS + deletedTask;
+
+        case "find":
+            ArrayList<Task> matchingTasks = tasklist.find(getDescription(inputArr));
+            return printList(matchingTasks);
         default:
             throw new DukeException(":( OOPS!!!! I'm sorry, but I don't know what that means!");
         }
 
 
+    }
+
+    /**
+     * Prints given list
+     * @param list List to be printed as a String
+     * @return String of list of task
+     */
+    private String printList(ArrayList<Task> list) {
+        String toReturn = "Here are the matching tasks in your list:";
+        for (int i = 0; i < list.size(); i++) {
+            Task currTask = list.get(i);
+            toReturn += "\n"+ (i + 1) + "." + currTask;
+        }
+        return toReturn;
     }
 }
