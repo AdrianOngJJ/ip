@@ -18,9 +18,8 @@ public class Storage {
 
     Storage(String filePath) {
         this.filePath = filePath;
-        String home =  System.getProperty("user.home"); // base directory
         // following code should give me [HOME_DIRECTORY]/Desktop/iP/data
-        this.path = java.nio.file.Paths.get(home,"Desktop", "iP", "data");
+        this.path = java.nio.file.Paths.get("data/tasks.txt");
     }
 
     /**
@@ -75,7 +74,7 @@ public class Storage {
     public ArrayList<Task> load() throws IOException, DukeException {
         ArrayList<Task> masterList = new ArrayList<>();
         try {
-            File dukeStore = new File(this.path + this.filePath);
+            File dukeStore = new File(String.valueOf(this.path));
             Scanner fileReader = new Scanner(dukeStore);
             while (fileReader.hasNextLine()) {
                 masterList.add(convertStringToTask(fileReader.nextLine()));
@@ -86,7 +85,7 @@ public class Storage {
             if (!isDirectoryExists) {
                 new File("data").mkdir();
             }
-            new File(path + "/tasks.txt").createNewFile();
+            new File(String.valueOf(path)).createNewFile();
             throw new DukeException("File not found. Creating new file...");
         }
 
@@ -100,7 +99,7 @@ public class Storage {
      * @throws IOException Missing file
      */
     public void saveAllTasks(TaskList tasklist) throws IOException {
-        File dukeStore = new File(this.path + this.filePath);
+        File dukeStore = new File(String.valueOf(this.path));
         FileWriter fw = new FileWriter(dukeStore);
         for (int i = 0; i < tasklist.size(); i++) {
             fw.write(taskToString(tasklist.get(i)));
